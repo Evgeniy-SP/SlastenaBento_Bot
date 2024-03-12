@@ -14,11 +14,16 @@ user_private_router.message.filter(ChatTypeFilter(['private']))
 async def start_cmd(message: types.Message):
     await message.answer(
         'Привет, я виртуальный помощник',
-        reply_markup=reply.start_keyboard2.as_markup(
-            resize_keyboard=True,
-            input_field_placeholder='Что Вас интересует?',
+        reply_markup=reply.get_keyboard(
+            'Меню',
+            'О нас',
+            'Отзывы',
+            'Варианты оплаты',
+            'Варианты доставки',
+            placeholder='Что-то заинтересовало?',
+            sizes=(3, 2)
         ),
-    )
+        )
 
 
 @user_private_router.message(
@@ -27,10 +32,17 @@ async def start_cmd(message: types.Message):
 async def echo(message: types.Message):
     await message.answer(
         'Вот меню:',
-        reply_markup=reply.test_keyboard.as_markup(
-            resize_keyboard=True,
-            input_field_placeholder='Что Вас интересует?',
-        ),
+        reply_markup=reply.get_keyboard(
+            'Костыль',
+            'Создать опрос',
+            'Отправить номер телефона',
+            'Отправить локацию',
+            placeholder='Контактные данные',
+            request_poll=1,
+            request_contact=2,
+            request_location=3,
+            sizes=(1, 3)
+        )
     )
 
 
