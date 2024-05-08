@@ -201,9 +201,9 @@ async def add_description(message: types.Message, state: FSMContext):
 
 
 # Ловим текст для состояния price и меняем его на image.
-@admin_router.message(AddProduct.price, or_f(F.text, F.text == ','))
+@admin_router.message(AddProduct.price, or_f(F.text, F.text == '.'))
 async def add_price(message: types.Message, state: FSMContext):
-    if message.text == ',':
+    if message.text == '.':
         await state.update_data(price=AddProduct.product_for_change.price)
     else:
         try:
